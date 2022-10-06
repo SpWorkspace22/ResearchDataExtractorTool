@@ -1,0 +1,21 @@
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Author Id</th>
+                <th>Author Name</th>
+                <th>Affiliation</th>
+            </tr>
+            </tr>
+            <tbody>
+                {% for author in all_authors %}
+                <tr>
+                    <td>{{author.author_id}}</td>
+                    <td>{{author.author_name}}</td>
+                    <td>{{author.affiliation}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
