@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
-
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: sans-serif
+} 
+
+main {
+    width: 100%;
+    height: 100vh;
 }
+
 #sidebar {
     width: 250px;
     height: 100vh;
@@ -12,9 +16,11 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: start;
+    background-color: #98D7C2;
 }
+
 
 #sidebar > p {
     margin-top: 10px;
@@ -43,7 +49,8 @@ body {
 }
 .nav-link:hover {
     border-radius: 10px;
-    background-color: white;
+    background-color: #ECE2D0;
+    font-weight: bolder;
     color: black;
 }
 
@@ -51,4 +58,17 @@ body {
     width: 30px;
     height: 100vh;
     background-color: rgb(246, 243, 243);
+}
+
+#main-content{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    
+}
+
+main > section {
+    width: 100%;
+    height: 100vh;
+    background-color: #DDFFE7;
 }

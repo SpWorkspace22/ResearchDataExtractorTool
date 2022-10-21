@@ -1,0 +1,28 @@
+h4 {
+    margin-top: 30px;
+    padding-left: 30px;
+}
+
+.filter-box {
+    margin-top: 30px;
+}
+
+.table-fixed {
+    width: 100%;
+    margin-top: 40px;
+    background-color: #f3f3f3;
+}
+
+tbody {
+    height:50px;
+    overflow:scroll;
+    width: 100%;
+}
+
+
+a {
+    color:black;
+    text-decoration: none;
+}
+
+

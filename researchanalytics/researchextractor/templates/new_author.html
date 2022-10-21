@@ -1,17 +1,44 @@
-<html>
-    <body>
-        <form action="add/" method="post">
-            {% csrf_token%}
-            <label for="author_id">Scholar Id</label>
-            <input type="text" id="author_id" name="author_id" required />
-            <br />
-            <label for="author_name">Author Name</label>
-            <input type="text" id="author_name" name="author_name" required />
-            <br />
-            <label for="affiliation">Affiliation</label>
-            <input type="text" id="affiliation" name="affiliation" />
-            <br />
-            <input type="submit" value="Add" />
-        </form>
-    </body>
-</html>
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Add Author {% endblock %}
+{% block style %}<link href="{% static 'css/add_author.css' %}" rel="stylesheet" />{% endblock %}
+
+{% block content %}
+<div id="author-form">
+<h4 class="text-primary fs-4">Register New Author</h4>
+<form class="row g-3" action="{% url 'add_authors' %}" method="POST">
+    {% csrf_token %}
+    <div class="col-md-6">
+        <label for="authorId" class="form-label">Scholar Id:</label>
+        <input type="text" class="form-control" id="authorId" required/>
+    </div>
+    <div class="col-md-6">
+        <label for="authorName" class="form-label">Author Name:</label>
+        <input type="text" class="form-control" id="authorName" required/>
+    </div>
+    <div class="col-md-6">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" required>
+    </div>
+    <div class="col-md-6">
+        <label for="affiliate" class="form-label">Affiliation:</label>
+        <input type="text" class="form-control" id="affiliate" />
+    </div>
+    <div class="col-md-6">
+        <label for="inputState" class="form-label">Department:</label>
+        <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>MCA</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="phone" class="form-label">Phone:</label>
+        <input type="phone" class="form-control" id="phone">
+    </div>
+    <div class="col-12">
+        <button id="submitButton" type="submit" class="btn btn-primary" style="width: 300px">
+            Create</button>
+    </div>
+</form>
+</div>
+{% endblock %}

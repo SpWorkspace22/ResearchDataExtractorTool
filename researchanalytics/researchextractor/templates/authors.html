@@ -1,21 +1,47 @@
-<html>
-    <body>
-        <table>
-            <tr>
-                <th>Author Id</th>
-                <th>Author Name</th>
-                <th>Affiliation</th>
-            </tr>
-            </tr>
-            <tbody>
-                {% for author in all_authors %}
-                <tr>
-                    <td>{{author.author_id}}</td>
-                    <td>{{author.author_name}}</td>
-                    <td>{{author.affiliation}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </body>
-</html>
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Authors {% endblock %}
+{% block style %}<link href="{% static 'css/authors.css' %}" rel="stylesheet" />{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="filter-box">
+    <div class="row mb-3">
+      <label for="inputEmail3" class="col-sm-1 col-form-label">Email</label>
+      <div class="col-sm-3">
+        <input type="email" class="form-control" id="inputEmail3">
+      </div>
+      <div class="col-sm-4">
+        <button type="button" class="btn btn-dark" style="width: 200px;">Find</button>
+      </div>
+    </div>
+  </div>
+  <table class="table table-fixed table-borderless bg-light table-hover table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Scholar Id</th>
+        <th>Author</th>
+        <th>Email</th>
+        <th>Affiliation</th>
+        <th>Department</th>
+        <th>Phone</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for author in all_authors %}
+      <tr>
+          <td>{{ author.author_id }}</td>
+          <td>{{ author.author_name }}</td>
+          <td>-</td>
+          <td>{{ author.affiliation }}</td>
+          <td>-</td>
+          <td>-</td>
+          <td><a href="#" class="btn btn-primary"><i class="bi bi-pen-fill"> Edit</i></a> 
+            | <a href="#" class="btn btn-danger"><i class="bi bi-eraser-fill"> Remove</i></a>
+          </td>
+      </tr>
+    {%endfor%}
+    </tbody>
+</div>
+{% endblock %}
