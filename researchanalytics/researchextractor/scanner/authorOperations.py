@@ -49,21 +49,32 @@ def removeAuthorById(author_id):
     except Exception as ex:
         print(ex)
 
+# Paper Crud
 def addPaper(paper):
     try:
-        paperCollection.insert_one(paper)
-        print("Paper Added")
+        filter_criteria = {'author':paper['author'],'title':paper['title']}
+        found = findPapers(filter_criteria)
+        if(found==None):
+            paperCollection.insert_one(paper)
+            print("Paper Added")
+        else:
+            updatePaper(filter_criteria,paper)
     except Exception as ex:
         print(ex)
 
-def findPaperByAuthorId(author_id):
-    pass
+def findPapers(filter):
+    try:
+        papers = paperCollection.find(filter)
+        return papers
+    except Exception as ex:
+        print(ex)
 
-def findAllPapers():
-    pass
-
-def updatePaper():
-    pass
+def updatePaper(filter_criteria,paper):
+    try:
+        authorCollection.update_one(filter_criteria,{"$set":paper})
+        print("Paper Updated")
+    except Exception as ex:
+        print(ex)
 
 def removePaper():
     pass

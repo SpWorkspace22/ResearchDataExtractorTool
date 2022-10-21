@@ -4,7 +4,12 @@ from django.urls import reverse
 
 from .scanner import authorOperations as author
 
+
 # Create your views here.
+
+def getIndexView(request):
+    return render(request,"index.html",{})
+
 def getAuthors(request):
     authors = author.findAuthors()
     return render(request,"authors.html",{"all_authors":authors})
