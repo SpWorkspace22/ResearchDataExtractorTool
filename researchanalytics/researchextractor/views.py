@@ -32,3 +32,7 @@ def addNewAuthor(request):
     print(author.addAuthor(newAuthor))
 
     return HttpResponseRedirect(reverse('new_authors', args=()))
+
+def getPapers(request):
+    papers = author.findPapers({})
+    return render(request, 'papers.html', {"all_papers":papers})
