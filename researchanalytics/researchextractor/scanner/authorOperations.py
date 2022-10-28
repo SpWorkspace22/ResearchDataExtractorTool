@@ -35,9 +35,9 @@ def findAuthorById(filter_criteria):
     else:
         return author
 
-def findAuthors():
+def findAuthors(filter_criteria):
     try:
-        authors = authorCollection.find({})
+        authors = authorCollection.find(filter_criteria)
         return authors
     except Exception as ex:
         print(ex)

@@ -10,35 +10,57 @@
     {% csrf_token %}
     <div class="col-md-6">
         <label for="authorId" class="form-label">Scholar Id:</label>
-        <input type="text" class="form-control" id="authorId" required/>
+        <input type="text" class="form-control" name="authorId" id="authorId" 
+        value="{{ author.author_id }}" {{ edit }} required/>
     </div>
     <div class="col-md-6">
         <label for="authorName" class="form-label">Author Name:</label>
-        <input type="text" class="form-control" id="authorName" required/>
+        <input type="text" class="form-control" name="authorName" id="authorName"
+        value="{{ author.author_name }}" required/>
     </div>
     <div class="col-md-6">
         <label for="email" class="form-label">Email:</label>
-        <input type="email" class="form-control" id="email" required>
+        <input type="email" class="form-control" name="email" id="email" 
+        value="{{ author.email }}" required>
     </div>
     <div class="col-md-6">
         <label for="affiliate" class="form-label">Affiliation:</label>
-        <input type="text" class="form-control" id="affiliate" />
+        <input type="text" class="form-control" name="affiliate" id="affiliate"
+        value="{{ author.affiliation }}" />
     </div>
     <div class="col-md-6">
-        <label for="inputState" class="form-label">Department:</label>
-        <select id="inputState" class="form-select">
-            <option selected>Choose...</option>
-            <option>MCA</option>
+        <label for="depart" class="form-label">Department:</label>
+        <select id="depart" name="depart" class="form-select">
+            <option>Select Department </option>
+            {% for department in departments %}
+                {% if department == author.department %}
+                    <option selected>{{department}}</option>
+                {% else %}
+                    <option>{{department}}</option>
+                {% endif %}
+            {% endfor %}
         </select>
     </div>
     <div class="col-md-6">
         <label for="phone" class="form-label">Phone:</label>
-        <input type="phone" class="form-control" id="phone">
+        <input type="phone" class="form-control" name="phone" id="phone" 
+        value="{{ author.phone }}">
     </div>
     <div class="col-12">
         <button id="submitButton" type="submit" class="btn btn-primary" style="width: 300px">
-            Create</button>
+            Submit</button>
     </div>
+    {% if error %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ error }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% elif success %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ success }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
 </form>
 </div>
 {% endblock %}
