@@ -1,5 +1,5 @@
 import re
-import authorOperations as db
+from . import authorOperations as db
 from scholarly import scholarly, ProxyGenerator
 
 
@@ -12,7 +12,7 @@ def createProxyServer():
         print(ex)
 
 def parseData():
-    authors = db.findAuthors()
+    authors = db.findAuthors({})
 
     for author in authors:
         search_query = scholarly.search_author_id(author["author_id"])

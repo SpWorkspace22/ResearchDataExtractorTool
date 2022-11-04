@@ -14,5 +14,8 @@ urlpatterns = [
     path('new_author/delete/<str:author_id>',views.removeAuthor,name="remove_author"),
 
     #Papers Urls
-    path('papers/',views.getPapers, name='papers')
+    path('papers/',views.getPapers, name='papers'),
+
+    #Scanner Url
+    path('scan/',views.getAuthorData,name="scan")
 ]

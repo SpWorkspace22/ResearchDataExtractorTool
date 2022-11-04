@@ -22,7 +22,6 @@ td, th {
 th {
   text-align: left;
   width: fit-content;
-  background-color: rgb(190, 220, 250);
   text-transform: uppercase;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -35,9 +34,9 @@ th, td {
 }
 
 td {
-    padding: 10px;
+  padding: 10px;
   border-bottom: none;
-  color: rgb(20, 20, 20);
+  color: rgb(20, 20, 20); 
 }
 
 td:first-of-type, th:first-of-type {

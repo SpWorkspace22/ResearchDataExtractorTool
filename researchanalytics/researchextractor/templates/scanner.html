@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Scan {% endblock %}
+{% block content %}
+    <form action="{% url 'scan' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Scan"/>   
+    </form>
+{% endblock %}

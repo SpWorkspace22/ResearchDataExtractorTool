@@ -64,7 +64,8 @@ def addPaper(paper):
 
 def findPapers(filter):
     try:
-        papers = paperCollection.find(filter)
+        papers = paperCollection.find(filter).sort('pub_year',-1)
+        print(papers)
         return papers
     except Exception as ex:
         print(ex)

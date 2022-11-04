@@ -13,13 +13,26 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                <form action="{% url 'papers' %}" method="POST" class="row g-3">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <label for="author" class="form-label">Scholar Id</label>
+                        <input type="text" class="form-control" name="author" id="author">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pub_year" class="form-label">Year</label>
+                        <input type="year" class="form-control" name="pub_year" id="pub_year">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="submit" class="btn btn-primary" value="Search" />
+                    </div>
+                </form>
             </div>
             </div>
         </div>
     </div>
     <div id="table-responsive" >
-        <table class="table table-borderless bg-light table-hover table-striped">
+        <table class="table table-borderless table-light table-hover table-striped">
             <thead class="table-dark">
                 <tr>
                     <th>Title</th>

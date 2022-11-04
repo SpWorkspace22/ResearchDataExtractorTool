@@ -1,9 +1,9 @@
-from tkinter.messagebox import RETRY
 from django.shortcuts import HttpResponseRedirect, redirect, render
 from django.http import HttpResponse
 from django.urls import reverse
 
 from .scanner import authorOperations as author
+from .scanner import paperExtract as scanner
 
 departments = ["MCA","M.TECH","B.TECH"]
 
@@ -58,5 +58,27 @@ def getAuthorsById(request):
 
 
 def getPapers(request):
-    papers = author.findPapers({})
+    papers = {}
+    filter_criteria = {}
+    if request.method=='POST':
+        if(request.POST['author']!=''):
+            filter_criteria['author']=request.POST['author']
+        
+        if(request.POST['pub_year']!=''):
+            filter_criteria['pub_year']=request.POST['pub_year']
+            print(filter_criteria)
+
+        papers = author.findPapers(filter_criteria)
+
+    else:
+        papers = author.findPapers(filter_criteria)
     return render(request, 'papers.html', {"all_papers":papers})
+
+
+# Scanner Related
+
+def getAuthorData(request):
+    if request.method=="POST":
+        scanner.beginExtarction()
+        pass
+    return render(request, 'scanner.html', {})
