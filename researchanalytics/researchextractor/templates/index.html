@@ -8,15 +8,20 @@
         <!-- CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+        
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        
+        <!-- Custom CSS -->
         <link href="{% static 'css/index.css' %}" rel="stylesheet" />
         {% block style %} {% endblock %}
     </head>
     <body>
-        <main>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <main class="bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light box">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{% url 'index' %}">
                         <span class="text-primary">Research</span><span class="text-dark"> Repository</span>
@@ -26,10 +31,10 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">
                                     <i class="bi bi-speedometer2"> Dashboard</i></a>
-                            </li>
+                            </li> -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-file-person-fill"> Author</i>
@@ -61,8 +66,76 @@
             </nav>
             <section>
                 {% block content %}
+                <div class="container-fluid ps-3 pe-3">
+                    <h5 class="display-5 mt-3">Summary Dashboard</h5>
+                    <div class="row my-4">
+                        <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            <div class="card bg-primary text-white box">
+                                <h5 class="card-header">Authors Count</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title text-center fs-1">{{ authors }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+                            <div class="card bg-success text-white box">
+                                <h5 class="card-header">Papers Count</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title text-center fs-1">{{ papers }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
+                            <div class="card bg-warning text-white box">
+                                <h5 class="card-header">Highest Citation</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title text-center fs-1">{{ max_cit }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 50px;">
+                        <div class="col-12 col-md-6">
+                            <div class="card box">
+                                <h5 class="card-header">Traffic last 6 months</h5>
+                                <div class="card-body">
+                                    <div id="traffic-chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="card box">
+                                <h5 class="card-header">Traffic last 6 months</h5>
+                                <div class="card-body">
+                                    <div id="traffic-chart1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {% endblock %}
             </section>
         </main>
+        <script>
+            new Chartist.Line('#traffic-chart', {
+                labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
+                series: [
+                    [23000, 25000, 19000, 34000, 56000, 64000]
+                ]
+                }, {
+                low: 0,
+                showArea: true
+            });
+
+            new Chartist.Line('#traffic-chart1', {
+                labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
+                series: [
+                    [23000, 25000, 19000, 34000, 56000, 64000]
+                ]
+                }, {
+                low: 0,
+                showArea: true
+            });
+        </script>
     </body>
 </html>

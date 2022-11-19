@@ -8,7 +8,7 @@ main {
     padding: 0;
     width: 100%;
     height: 100vh;
-    background-color: #C1DBF0;
+    background-color: white;
 }
 
 .navbar {
@@ -19,4 +19,11 @@ main {
     border-radius: 10px;
     font-weight: bold;
     background-color: #DDFFE7;
+}
+
+.box {
+  transition: box-shadow .3s;  
+}
+.box:hover {
+  box-shadow: 0 0 20px rgba(5, 5, 5, 0.2); 
 }

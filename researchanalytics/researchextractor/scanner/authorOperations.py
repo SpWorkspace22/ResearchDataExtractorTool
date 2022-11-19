@@ -80,3 +80,36 @@ def updatePaper(filter_criteria,paper):
 def removePaper():
     pass
 
+
+
+# Summary Functions
+
+def getAuthorCount():
+    authors_count = 0
+    
+    try:
+        authors_count = authorCollection.find({}).count()
+    except Exception as ex:
+        print(ex)
+
+    return authors_count
+
+def getPapersCount():
+    paper_count = 0
+    
+    try:
+        paper_count = paperCollection.find({}).count()
+    except Exception as ex:
+        print(ex)
+
+    return paper_count
+
+def getMaxCitation():
+    max_cit = 0
+    try:
+        a = paperCollection.find({}).sort([("number_of_citation",-1)]).limit(1)
+        for i in a:
+            max_cit = i["number_of_citation"]
+    except Exception as ex:
+        print(ex)
+    return max_cit

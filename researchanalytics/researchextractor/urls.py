@@ -18,4 +18,6 @@ urlpatterns = [
 
     #Scanner Url
     path('scan/',views.getAuthorData,name="scan")
+
+
 ]

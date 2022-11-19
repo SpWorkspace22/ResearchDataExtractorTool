@@ -8,9 +8,16 @@ from .scanner import paperExtract as scanner
 departments = ["MCA","M.TECH","B.TECH"]
 
 # Create your views here.
-
 def getIndexView(request):
-    return render(request,"index.html",{})
+    author_count = author.getAuthorCount()
+    papers_count = author.getPapersCount()
+    max_cit = author.getMaxCitation()
+    summary = {
+        "authors":author_count,
+        "papers":papers_count,
+        "max_cit":max_cit
+        }
+    return render(request,"index.html",summary)
 
 def createNewAuthor(request):
     return render(request, 'new_author.html', {"departments":departments})
