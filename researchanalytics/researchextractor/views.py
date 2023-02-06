@@ -2,6 +2,9 @@ from django.shortcuts import HttpResponseRedirect, redirect, render
 from django.http import HttpResponse
 from django.urls import reverse
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 from .scanner import authorOperations as author
 from .scanner import paperExtract as scanner
 
@@ -72,7 +75,7 @@ def getPapers(request):
             filter_criteria['author']=request.POST['author']
         
         if(request.POST['pub_year']!=''):
-            filter_criteria['pub_year']=request.POST['pub_year']
+            filter_criteria['pub_year']=int(request.POST['pub_year'])
             print(filter_criteria)
 
         papers = author.findPapers(filter_criteria)
@@ -85,7 +88,28 @@ def getPapers(request):
 # Scanner Related
 
 def getAuthorData(request):
-    if request.method=="POST":
-        scanner.beginExtarction()
-        pass
-    return render(request, 'scanner.html', {})
+    scanner.beginExtarction()
+    return HttpResponseRedirect(reverse('index',kwargs=()))
+
+
+# Author to Paper Navigartion
+
+def getAuthorById(request,author_id):
+
+    filter_criteria = {'author':author_id}
+    
+    papers = author.findPapers(filter_criteria)
+    return render(request, 'papers.html', {"all_papers":papers})
+
+
+# ChartDemo
+
+class CharData(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self,request,format=None):
+        data = {}
+        data['yearSummary'] = author.getPaperCountByYear()
+        data['authorSummary'] = author.getPaperCountByAuthor()
+        return Response(data)

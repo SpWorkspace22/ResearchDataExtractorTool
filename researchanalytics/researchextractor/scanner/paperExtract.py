@@ -6,8 +6,9 @@ from scholarly import scholarly, ProxyGenerator
 def createProxyServer():
     try:
         pg = ProxyGenerator()
-        success = pg.FreeProxies()
+        pg.FreeProxies()
         scholarly.use_proxy(pg)
+
     except Exception as ex:
         print(ex)
 
@@ -22,8 +23,8 @@ def parseData():
                 papers = {}
                 papers['title']=publication['bib']['title']
                 papers['journal_name']=re.sub(r'[\d+\(\)\-,–…]','', publication['bib']['citation']).rstrip()
-                papers['pub_year']=publication['bib']['pub_year']
-                papers['number_of_citation']=publication['num_citations']
+                papers['pub_year']=int(publication['bib']['pub_year'])
+                papers['number_of_citation']=int(publication['num_citations'])
                 papers['author']=author["author_id"]
                 db.addPaper(papers)
         

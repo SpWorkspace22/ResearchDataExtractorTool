@@ -2,8 +2,22 @@
 {% load static %}
 {% block title %} Scan {% endblock %}
 {% block content %}
-    <form action="{% url 'scan' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" class="btn btn-primary" value="Scan"/>   
-    </form>
+    <div class="container mt-5">
+        <form action="{% url 'scan' %}" method="POST">
+            {% csrf_token %}
+            <div class="row g-3">
+                <div class="col">
+                    <select class="form-select" name="author" aria-label="Default select example">
+                    <option selected>Select Author</option>
+                       {% for author in author_list %}
+                            <option value="{{author.author_i }}">{{author.author}}</option>
+                       {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" value="Scan" style="width: 150px;">
+                </div>
+            </div>  
+        </form>
+    </div>
 {% endblock %}

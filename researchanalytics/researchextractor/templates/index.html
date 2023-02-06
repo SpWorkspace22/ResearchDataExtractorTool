@@ -12,8 +12,7 @@
         
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         
         <!-- Custom CSS -->
         <link href="{% static 'css/index.css' %}" rel="stylesheet" />
@@ -31,10 +30,6 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
-                            <!-- <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">
-                                    <i class="bi bi-speedometer2"> Dashboard</i></a>
-                            </li> -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-file-person-fill"> Author</i>
@@ -94,48 +89,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-top: 50px;">
-                        <div class="col-12 col-md-6">
-                            <div class="card box">
-                                <h5 class="card-header">Traffic last 6 months</h5>
-                                <div class="card-body">
-                                    <div id="traffic-chart"></div>
-                                </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                <div class="container-fluid">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <canvas id="myChartline" class="box"></canvas>
+                            </div>
+                            <div class="col-md-6">
+                                <canvas id="myChartBar" class="box"></canvas>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
-                            <div class="card box">
-                                <h5 class="card-header">Traffic last 6 months</h5>
-                                <div class="card-body">
-                                    <div id="traffic-chart1"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 {% endblock %}
             </section>
         </main>
-        <script>
-            new Chartist.Line('#traffic-chart', {
-                labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
-                series: [
-                    [23000, 25000, 19000, 34000, 56000, 64000]
-                ]
-                }, {
-                low: 0,
-                showArea: true
-            });
-
-            new Chartist.Line('#traffic-chart1', {
-                labels: ['January', 'Februrary', 'March', 'April', 'May', 'June'],
-                series: [
-                    [23000, 25000, 19000, 34000, 56000, 64000]
-                ]
-                }, {
-                low: 0,
-                showArea: true
-            });
-        </script>
+        <script src="{% static 'js/index.js' %}"></script>
     </body>
 </html>

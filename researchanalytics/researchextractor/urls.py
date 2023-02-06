@@ -17,7 +17,11 @@ urlpatterns = [
     path('papers/',views.getPapers, name='papers'),
 
     #Scanner Url
-    path('scan/',views.getAuthorData,name="scan")
+    path('scan/',views.getAuthorData,name="scan"),
 
+    #Author to paper navigation
+    path('papers/<str:author_id>',views.getAuthorById,name="author_paper"),
 
+    #chartDemo
+    path('api',views.CharData.as_view())
 ]

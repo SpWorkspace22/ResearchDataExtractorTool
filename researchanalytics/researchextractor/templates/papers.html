@@ -31,27 +31,29 @@
             </div>
         </div>
     </div>
-    <div id="table-responsive" >
+    <div id="table-responsive" class="fixTableHead" style="height: 700px;">
         <table class="table table-borderless table-light table-hover table-striped">
-            <thead class="table-dark">
+            <thead class="table-dark" style="position: sticky;top: 0">
                 <tr>
+                    <th>Sr No.</th>
                     <th>Title</th>
                     <th>Journal</th>
                     <th>Publication Year</th>
                     <th>Citation Count</th>
                     <th>Author</th>
-                    <th>Action</th>
+                    <!-- <th>Action</th> -->
                 </tr>
             </thead>
             <tbody>
             {% for paper in all_papers %}
             <tr>
+                <td>{{ forloop.counter }}.</td>
                 <td>{{ paper.title }}</td>
                 <td>{{ paper.journal_name }}</td>
                 <td>{{ paper.pub_year }}</td>
                 <td>{{ paper.number_of_citation }}</td>
                 <td>{{ paper.author }}</td>
-                <td><a href="#" class="btn btn-danger"><i class="bi bi-eraser-fill"> Remove</i></a>
+                <!-- <td><a href="#" class="btn btn-danger"><i class="bi bi-eraser-fill"> Remove</i></a> -->
                 </td>
             </tr>
             {%endfor%}

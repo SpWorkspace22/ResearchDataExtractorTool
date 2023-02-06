@@ -53,10 +53,10 @@ def removeAuthorById(author_id):
 def addPaper(paper):
     try:
         filter_criteria = {'author':paper['author'],'title':paper['title']}
-        found = findPapers(filter_criteria)
-        if(found==None):
+        cur = findPapers(filter_criteria)
+        found = list(cur)
+        if(len(found)==0):
             paperCollection.insert_one(paper)
-            print("Paper Added")
         else:
             updatePaper(filter_criteria,paper)
     except Exception as ex:
@@ -83,7 +83,6 @@ def removePaper():
 
 
 # Summary Functions
-
 def getAuthorCount():
     authors_count = 0
     
@@ -113,3 +112,41 @@ def getMaxCitation():
     except Exception as ex:
         print(ex)
     return max_cit
+
+
+
+# Aggregation Operations
+
+def getPaperCountByYear():
+    # db.papers.aggregate([{$group:{_id:"$pub_year",total_paper:{$sum:1}}}])
+
+    agg_result = paperCollection.aggregate([
+        {"$group":{"_id":"$pub_year","total_paper":{"$sum":1}}},
+        {"$sort":{"_id":1}}
+        ])
+    yearSummary = {'labels':[],'paperCount':[],'chartLabel':'Year Wise Published Paper'}
+    
+    for summary in agg_result:
+        yearSummary['labels'].append(summary['_id'])
+        yearSummary['paperCount'].append(summary['total_paper'])
+    
+    return yearSummary
+
+def getPaperCountByAuthor():
+
+    agg_result = paperCollection.aggregate([
+        {"$group":{"_id":"$author","total_paper":{"$sum":1}}},
+        {"$sort":{"_id":1}}
+        ])
+
+    authorSummary = {'labels':[],'paperCount':[],'chartLabel':'Paper Publish By Authors'}
+    
+    for summary in agg_result:
+        authorSummary['labels'].append(
+            findAuthorById({'author_id':summary['_id']})['author_name'])
+        authorSummary['paperCount'].append(summary['total_paper'])
+    
+    return authorSummary
+    
+    
+
